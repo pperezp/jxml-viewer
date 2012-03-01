@@ -768,7 +768,7 @@ private void jRadioButtonMenuItem4ActionPerformed(java.awt.event.ActionEvent evt
 }//GEN-LAST:event_jRadioButtonMenuItem4ActionPerformed
 
 private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-//    chos.setAcceptAllFileFilterUsed(false);
+    chos.setAcceptAllFileFilterUsed(false);
     chos.addChoosableFileFilter(new FileFilter(){
         @Override
             public boolean accept(File f) {

@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -23,7 +24,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Abrir {
     private String ruta;
-    private String[] extension;
+    private String[] extensiones;
     private JFileChooser fileChooser;
     private FileNameExtensionFilter[] filtros;
     private File archivo;
@@ -31,27 +32,46 @@ public class Abrir {
 
     public Abrir(){
         fileChooser = new JFileChooser();
+        fileChooser.setAcceptAllFileFilterUsed(false);
     }
 
     private void setExtension(String[] extensiones){
-        extension = new String[extensiones.length];
-        extension = extensiones;
+        this.extensiones = new String[extensiones.length];
+        this.extensiones = extensiones;
         escribirExtensiones();
     }
 
     private void escribirExtensiones(){
-        filtros = new FileNameExtensionFilter[extension.length];
-        for(int i=0;i<filtros.length;i++){
-            filtros[i] = new FileNameExtensionFilter("*."+extension[i], extension[i]);
+        for (final String extension : extensiones) {
+            fileChooser.addChoosableFileFilter(new FileFilter() {
+
+                @Override
+                public boolean accept(File f) {
+                    if (f.getName().contains(extension) || f.isDirectory()) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+
+                @Override
+                public String getDescription() {
+                    return "*."+extension;
+                }
+            });
         }
-        agregarFiltros();
+//        filtros = new FileNameExtensionFilter[extension.length];
+//        for(int i=0;i<filtros.length;i++){
+//            filtros[i] = new FileNameExtensionFilter("*."+extension[i], extension[i]);
+//        }
+//        agregarFiltros();
     }
 
-    private void agregarFiltros(){
-        for(int i=0;i<filtros.length;i++){
-            fileChooser.addChoosableFileFilter(filtros[i]);
-        }
-    }
+//    private void agregarFiltros(){
+//        for(int i=0;i<filtros.length;i++){
+//            fileChooser.addChoosableFileFilter(filtros[i]);
+//        }
+//    }
 
     /**
      *
@@ -75,9 +95,8 @@ public class Abrir {
             setExtension(ext);
         }
 
-        fileChooser.setAcceptAllFileFilterUsed(false);
-        fileChooser.setCurrentDirectory(new File(rutaDirectorioPorDefecto));
-        int seleccion = fileChooser.showDialog(null, textoDeBotonDeAprovacion);
+        fileChooser.setApproveButtonText(textoDeBotonDeAprovacion);
+        int seleccion = fileChooser.showOpenDialog(null);
         try{
             if (seleccion == JFileChooser.APPROVE_OPTION){
                archivo = fileChooser.getSelectedFile();
