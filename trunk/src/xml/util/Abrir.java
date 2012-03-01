@@ -23,25 +23,20 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Patricio
  */
 public class Abrir {
-    private String ruta;
-    private String[] extensiones;
-    private JFileChooser fileChooser;
-    private FileNameExtensionFilter[] filtros;
-    private File archivo;
-    private BufferedReader reader;
+    private static String ruta;
+    private static String[] extensiones;
+    private static JFileChooser fileChooser;
+    private static FileNameExtensionFilter[] filtros;
+    private static File archivo;
+    private static BufferedReader reader;
 
-    public Abrir(){
-        fileChooser = new JFileChooser();
-        fileChooser.setAcceptAllFileFilterUsed(false);
-    }
-
-    private void setExtension(String[] extensiones){
-        this.extensiones = new String[extensiones.length];
-        this.extensiones = extensiones;
+    private static void setExtension(String[] extensiones){
+        Abrir.extensiones = new String[extensiones.length];
+        Abrir.extensiones = extensiones;
         escribirExtensiones();
     }
 
-    private void escribirExtensiones(){
+    private static void escribirExtensiones(){
         for (final String extension : extensiones) {
             fileChooser.addChoosableFileFilter(new FileFilter() {
 
@@ -88,7 +83,10 @@ public class Abrir {
      * Retornará FALSE si el usuario no abre algún archivo o
      * ocurrio un error
      */
-    public boolean abrir(String extensiones, String textoDeBotonDeAprovacion, String rutaDirectorioPorDefecto){
+    public static boolean abrir(String extensiones, String textoDeBotonDeAprovacion, String rutaDirectorioPorDefecto){
+        fileChooser = new JFileChooser();
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        
         if(extensiones != null){
             String[] ext = extensiones.split(",");
             sacarEspacios(ext);
@@ -111,11 +109,11 @@ public class Abrir {
         }
     }
 
-    public String getRuta(){
+    public static String getRuta(){
         return ruta;
     }
 
-    private void sacarEspacios(String[] ext) {
+    private static void sacarEspacios(String[] ext) {
         for(int i=0;i<ext.length;i++){
             ext[i] = ext[i].trim();
         }
@@ -126,7 +124,7 @@ public class Abrir {
      * @return
      * Retornará NULL si hay algún Error o el archivo esta Vacío
      */
-    public String getArchivoComoString(){
+    public static String getArchivoComoString(){
         String archiv = "";
         try {
             reader = new BufferedReader(new FileReader(archivo));
@@ -150,7 +148,7 @@ public class Abrir {
         }
     }
 
-    public File getArchivo() {
+    public static File getArchivo() {
         return archivo;
     }
 

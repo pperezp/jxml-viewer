@@ -999,10 +999,9 @@ private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
 
     private void abrir() {
-        Abrir a = new Abrir();
-        if(a.abrir("xml", "Abrir XML", "")){
-            area.setText(a.getArchivoComoString());
-            cargarXML(new File(a.getRuta()), true);
+        if(Abrir.abrir("xml", "Abrir XML", "")){
+            area.setText(Abrir.getArchivoComoString());
+            cargarXML(new File(Abrir.getRuta()), true);
         }
     }
 
