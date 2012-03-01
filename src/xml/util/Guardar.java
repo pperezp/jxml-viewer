@@ -6,6 +6,7 @@ package xml.util;
 
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -15,7 +16,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Guardar {
 
     private static String ruta;
-    private static String[] extension;
+    private static String[] extensiones;
     private static JFileChooser fileChooser;
     private static FileNameExtensionFilter[] filtros;
     private static File archivo;
@@ -28,30 +29,31 @@ public class Guardar {
         return rutaSinExtension;
     }
 
-    /**
-     *
-     */
-    public Guardar() {
-        fileChooser = new JFileChooser();
-    }
 
     private static void setExtension(String[] extensiones) {
-        extension = new String[extensiones.length];
-        extension = extensiones;
+        Guardar.extensiones = new String[extensiones.length];
+        Guardar.extensiones = extensiones;
         escribirExtensiones();
     }
 
     private static void escribirExtensiones() {
-        filtros = new FileNameExtensionFilter[extension.length];
-        for (int i = 0; i < filtros.length; i++) {
-            filtros[i] = new FileNameExtensionFilter("*." + extension[i], extension[i]);
-        }
-        agregarFiltros();
-    }
+        for (final String extension : extensiones) {
+            fileChooser.addChoosableFileFilter(new FileFilter() {
 
-    private static void agregarFiltros() {
-        for (int i = 0; i < filtros.length; i++) {
-            fileChooser.addChoosableFileFilter(filtros[i]);
+                @Override
+                public boolean accept(File f) {
+                    if (f.getName().contains(extension) || f.isDirectory()) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+
+                @Override
+                public String getDescription() {
+                    return "*."+extension;
+                }
+            });
         }
     }
 
@@ -76,13 +78,14 @@ public class Guardar {
      */
     public static boolean guardarComo(String nombreDeArchivo, String extensiones, String textoDeBotonDeAprovacion, String rutaDirectorioPorDefecto) {
         fileChooser = new JFileChooser();
+        fileChooser.setAcceptAllFileFilterUsed(false);
         if (extensiones != null) {
             String[] ext = extensiones.split(",");
             sacarEspacios(ext);
             setExtension(ext);
         }
 
-        fileChooser.setAcceptAllFileFilterUsed(false);
+        
         fileChooser.setSelectedFile(new File(nombreDeArchivo));
         fileChooser.setCurrentDirectory(new File(rutaDirectorioPorDefecto));
         return guardar(textoDeBotonDeAprovacion);
