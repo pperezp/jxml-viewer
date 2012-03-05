@@ -19,7 +19,7 @@ public class Tag extends Atributo {
     private List<Atributo> atributos;
     private Tag padre;
     private List<Tag> hijos;
-    private CData valorCdata;
+    private CData valorCdata; 
     private List<Comentario> comentarios;
     public static int TAG = 0;
     public static int COMENTARIO = 1;

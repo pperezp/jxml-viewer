@@ -86,6 +86,7 @@ public class Abrir {
     public static boolean abrir(String extensiones, String textoDeBotonDeAprovacion, String rutaDirectorioPorDefecto){
         fileChooser = new JFileChooser();
         fileChooser.setAcceptAllFileFilterUsed(false);
+        fileChooser.setCurrentDirectory(new File(rutaDirectorioPorDefecto));
         
         if(extensiones != null){
             String[] ext = extensiones.split(",");
