@@ -5,7 +5,6 @@
 package xml.gui;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -1201,7 +1200,38 @@ private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
     
     private void initAcercaDe() {
-        AcercaDe ad = new AcercaDe(NOMBRE_SW, "Programa práctico para visualizar archivos XML de forma gráfica", "Patricio Pérez Pinto", "2012", "Patricio Pérez Pinto", GPL.AMBAS_VERSIONES);
+        AcercaDe ad = new AcercaDe(new DatosAcercaDe() {
+            //NOMBRE_SW, "Programa práctico para visualizar archivos XML de forma gráfica", "Patricio Pérez Pinto", "2012", "Patricio Pérez Pinto", GPL.AMBAS_VERSIONES
+            @Override
+            public String getNombreDelPrograma() {
+                return NOMBRE_SW;
+            }
+
+            @Override
+            public String getdescripcionCortaDelPrograma() {
+                return "Programa práctico para visualizar archivos XML de forma gráfica";
+            }
+
+            @Override
+            public String getAutor() {
+                return "Patricio Pérez Pinto";
+            }
+
+            @Override
+            public String getAno() {
+                return "2012";
+            }
+
+            @Override
+            public String getEmailDeContacto() {
+                return "contacto@pperezp.com";
+            }
+
+            @Override
+            public int getIdiomaLicencia() {
+                return GPL.AMBAS_VERSIONES;
+            }
+        });
         ad.addComponent(this.menuItemAcercaDe);
     }
 }
