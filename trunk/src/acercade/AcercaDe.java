@@ -27,15 +27,15 @@ public class AcercaDe extends javax.swing.JDialog implements java.awt.event.Mous
     private javax.swing.JScrollPane jScrollPane3;
     public static Rectangle PREFERED_SIZE = new Rectangle(590,430);
     
-    public AcercaDe(String nombreDelPrograma, String descripcionCortaDelPrograma, String autor, String ano, String emailDeContacto, int idiomaLicencia){
+    public AcercaDe(DatosAcercaDe dad){
         super();
-        nombreSW = nombreDelPrograma;
-        this.autor = autor;
-        this.descripcionDelPrograma = descripcionCortaDelPrograma;
-        this.ano = ano;
-        this.emailDeContacto = emailDeContacto;
+        nombreSW = dad.getNombreDelPrograma();
+        this.autor = dad.getAutor();
+        this.descripcionDelPrograma = dad.getdescripcionCortaDelPrograma();
+        this.ano = dad.getAno();
+        this.emailDeContacto = dad.getEmailDeContacto();
         this.setTitle("Acerca de "+this.nombreSW);
-        idioma = idiomaLicencia;
+        idioma = dad.getIdiomaLicencia();
         
         tituloAcercaDe = new JLabel();
         tituloAcercaDe.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
@@ -88,8 +88,8 @@ public class AcercaDe extends javax.swing.JDialog implements java.awt.event.Mous
         this.setResizable(false);
     }
     
-    public AcercaDe(String nombreDelPrograma, String descripcionDelPrograma, String autor, String ano, String emailDeContacto, int idiomaLicencia, int anchoVentana, int altoVentana){
-        this(nombreDelPrograma, descripcionDelPrograma, autor, ano, emailDeContacto, idiomaLicencia);
+    public AcercaDe(DatosAcercaDe dad, int anchoVentana, int altoVentana){
+        this(dad);
         PREFERED_SIZE = new Rectangle(anchoVentana, altoVentana);
         redimensionarVentana();
     }
