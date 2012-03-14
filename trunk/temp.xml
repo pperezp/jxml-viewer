@@ -1,18 +1,6 @@
-<clientes cantidad='2'>
-	<cliente-vip><!--comentario de mierda-->
-		<rut>111</rut>
-		<nombre>asdasd</nombre>
-	</cliente-vip>
-	<cliente-vip>
-		<rut>111</rut>
-		<nombre>asdasd</nombre>
-	</cliente-vip>
-	<cliente-vip>
-		<rut>222</rut>
-		<nombre>asdasd</nombre>
-	</cliente-vip>
-	<cliente-vip>
-		<rut>111</rut>
-		<nombre>asdasd</nombre>
-	</cliente-vip>
-</clientes>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<asdasasd>
+<asd asdas="123">
+<sdfsdf>2323423</sdfsdf>
+</asd>
+</asdasasd>
