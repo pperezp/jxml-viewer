@@ -1184,17 +1184,25 @@ private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         }
                     }
                     if(archivoXML != null){
-                        String ar = Archivo.leerArchivo(archivoXML.getAbsolutePath());
-                        area.setText(ar);
-                        archivo = archivoXML;
-                        refresh();
+                        final File arXML = archivoXML;
+                        new Thread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                try {
+                                    String ar = Archivo.leerArchivo(arXML.getAbsolutePath());
+                                    area.setText(ar);
+                                    archivo = arXML;
+                                    refresh();
+                                } catch (IOException ex) {
+                                }
+                            }
+                        }).start();
                         
                     }
                 }
             } catch (UnsupportedFlavorException ex) {
-                ex.printStackTrace();
             } catch (IOException ex) {
-                ex.printStackTrace();
             }
          }
     }
