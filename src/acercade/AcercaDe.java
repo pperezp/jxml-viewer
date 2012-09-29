@@ -52,6 +52,7 @@ public class AcercaDe extends javax.swing.JDialog implements java.awt.event.Mous
         
         licencia.setColumns(20);
         licencia.setLineWrap(true);
+        licencia.setWrapStyleWord(true);
         licencia.setRows(5);
         licencia.setEditable(false);
         jScrollPane3.setViewportView(licencia);
