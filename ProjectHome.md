@@ -1,0 +1,1 @@
+JXML Viewer es un programa para visualizar y editar archivos XML de forma gráfica e intuitiva. Este software se encuentra bajo licencia GPL v3. Este software esta construido con Netbeans, así que puedes descargar el proyecto
